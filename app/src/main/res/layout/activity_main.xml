@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.example.mehungry.feedme.MainActivity">
+
+    <ImageView
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:paddingTop="25dp"
+        android:src="@mipmap/logo_background"
+        android:id="@+id/main_logo"
+        />
+
+    <EditText
+        android:id="@+id/main_username"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:paddingTop="75sp"
+        android:hint="username"/>
+   <EditText
+       android:layout_width="250sp"
+       android:layout_height="wrap_content"
+       android:inputType="textPassword"
+       android:id="@+id/main_password"
+       android:hint="password"
+       />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Forgot password?"
+       android:paddingTop="75sp"
+       />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Don't have an account?"
+       />
+</LinearLayout>
