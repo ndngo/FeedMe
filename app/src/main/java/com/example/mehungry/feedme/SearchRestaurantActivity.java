@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,9 @@ public class SearchRestaurantActivity extends AppCompatActivity implements Googl
     private GoogleApiClient mGoogleApiClient;
     public static final int PLACE_AUTOCOMPLETE_REQUEST = 1;
     private TextView searchTextView;
+    private TextView name;
+    private TextView address;
+    private RatingBar ratingbar;
 
     // can;'t filter results with place picker
     // use autocomplete instead to search nearby
@@ -70,6 +74,9 @@ public class SearchRestaurantActivity extends AppCompatActivity implements Googl
                 .enableAutoManage(this, this)
                 .build();
         searchTextView = findViewById(R.id.searchrestaurant_searchtext);
+        name = findViewById(R.id.searchrestaurant_name);
+        address = findViewById(R.id.searchrestaurant_address);
+        ratingbar = findViewById(R.id.searchrestaurant_rating);
         Button searchButton = findViewById(R.id.searchrestaurant_searchbutton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +99,10 @@ public class SearchRestaurantActivity extends AppCompatActivity implements Googl
         if(requestCode == PLACE_AUTOCOMPLETE_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                Log.i("SEARCH_RESTAURANT", "Place: " + place.getName());
                 searchTextView.setText(place.getName());
+                name.setText(place.getName());
+                address.setText(place.getAddress());
+                ratingbar.setNumStars((int)place.getRating());
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 Log.i("SEARCH_RESTAURANT", status.getStatusMessage());

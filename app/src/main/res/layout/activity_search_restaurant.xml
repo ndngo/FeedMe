@@ -22,7 +22,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:hint="Search favourites"
+            android:hint="Search for food"
             android:id="@+id/searchrestaurant_searchtext"
             android:layout_weight="0.8"/>
 
@@ -38,14 +38,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Favourites: "
-        android:textSize="20sp"
-        android:paddingTop="5sp"
-        android:paddingBottom="5sp"/>
-    <ListView
+        android:id="@+id/searchrestaurant_name"
+        android:textSize="30sp"/>
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:id="@+id/searchrestaurant_recent">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:id="@+id/searchrestaurant_address"
+        android:textSize="30sp"/>
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchrestaurant_rating"/>
+
 
 </LinearLayout>
