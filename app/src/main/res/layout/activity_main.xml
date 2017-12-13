@@ -8,19 +8,32 @@
     android:orientation="vertical"
     tools:context="com.example.mehungry.feedme.MainActivity">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Just"
+        android:textSize="30dp"
+        android:paddingTop="20dp"/>
     <ImageView
         android:layout_width="225dp"
         android:layout_height="225dp"
-        android:paddingTop="25dp"
-        android:src="@mipmap/logo_background"
+        android:src="@drawable/feedme"
         android:id="@+id/main_logo"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR"
+        android:textSize="15dp"
+        android:paddingTop="20dp"/>
 
     <EditText
         android:id="@+id/main_username"
         android:layout_width="250sp"
         android:layout_height="wrap_content"
-        android:paddingTop="75sp"
+        android:paddingTop="25sp"
         android:hint="username"/>
    <EditText
        android:layout_width="250sp"
@@ -38,7 +51,7 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text="Forgot password?"
-       android:paddingTop="75sp"
+       android:paddingTop="40sp"
        />
    <TextView
        android:layout_width="wrap_content"

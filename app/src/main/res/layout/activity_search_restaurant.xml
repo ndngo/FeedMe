@@ -10,16 +10,36 @@
     android:paddingTop="10dp"
     tools:context="com.example.mehungry.feedme.SearchRestaurantActivity">
 
-
-    <fragment
-        android:id="@+id/search_fragment"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:src="@drawable/feedme"
+            android:layout_weight="0.2"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="Search favourites"
+            android:id="@+id/searchrestaurant_searchtext"
+            android:layout_weight="0.8"/>
+
+        <Button
+            android:id="@+id/searchrestaurant_searchbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:text="Search"/>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recently searched: "
+        android:text="Favourites: "
+        android:textSize="20sp"
         android:paddingTop="5sp"
         android:paddingBottom="5sp"/>
     <ListView
@@ -27,8 +47,5 @@
         android:layout_height="125dp"
         android:id="@+id/searchrestaurant_recent">
     </ListView>
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"/>
+
 </LinearLayout>
