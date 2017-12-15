@@ -14,4 +14,42 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string-array name="food_search_terms">
+        <item>japanese</item>
+        <item>korean</item>
+        <item>italian</item>
+        <item>chinese</item>
+        <item>sushi</item>
+        <item>noodles</item>
+        <item>seafood</item>
+        <item>takeout</item>
+        <item>fastfood</item>
+        <item>coffee</item>
+        <item>doughnut</item>
+        <item>donut</item>
+        <item>pastries</item>
+        <item>bakery</item>
+        <item>mediterranean</item>
+        <item>indian</item>
+        <item>shawarma</item>
+        <item>greek</item>
+        <item>caribbean</item>
+        <item>bahamian</item>
+        <item>filipino</item>
+        <item>asian</item>
+        <item>bar</item>
+        <item>thai</item>
+        <item>grill</item>
+        <item>vegan</item>
+        <item>vegetarian</item>
+        <item>breakfast</item>
+        <item>brunch</item>
+        <item>dinner</item>
+        <item>lunch</item>
+        <item>tea</item>
+        <item>cajun</item>
+        <item>ice cream</item>
+        <item>gelato</item>
+    </string-array>
 </resources>

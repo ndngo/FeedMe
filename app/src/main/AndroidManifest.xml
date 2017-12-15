@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDBc3FgMbWEcuDq7jj6fHZqj1EYHhhSUUU"/>
+            android:value="AIzaSyDBc3FgMbWEcuDq7jj6fHZqj1EYHhhSUUU" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +33,8 @@
         <activity android:name=".ViewProfileActivity" />
         <activity android:name=".ViewNotificationActivity" />
         <activity android:name=".ViewSecurityActivity" />
-        <activity android:name=".ViewAccountSettingsActivity"></activity>
+        <activity android:name=".ViewAccountSettingsActivity" />
+        <activity android:name=".GetRestaurantsAsyncActivity"></activity>
     </application>
 
 </manifest>
