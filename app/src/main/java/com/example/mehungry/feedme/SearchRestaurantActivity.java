@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class SearchRestaurantActivity extends AppCompatActivity
@@ -44,11 +46,13 @@ OnRestaurantRequestCompleted {
     protected static GeoDataClient mGeoDataClient;
     protected PlaceDetectionClient mPlaceDetectionClient;
     private ImageView searchRandomButton;
-    private TextView searchTextView;
+//    private TextView searchTextView;
+    private Place place;
     private TextView name;
     private TextView address;
     private RatingBar ratingbar;
     private static LatLng northEast, southWest;
+    private ArrayList<String> favourites;
     // can;'t filter results with place picker
     // use autocomplete instead to search nearby
     public void launchPlacePicker() throws GooglePlayServicesNotAvailableException, GooglePlayServicesRepairableException {
@@ -94,11 +98,25 @@ OnRestaurantRequestCompleted {
         northEast = new LatLng(43.972598, -79.118649);
         southWest = new LatLng(43.681140, -79.671073);
         searchRandomButton = findViewById(R.id.searchrestaurant_searchrandom);
-        searchTextView = findViewById(R.id.searchrestaurant_searchtext);
+//        searchTextView = findViewById(R.id.searchrestaurant_searchtext);
         name = findViewById(R.id.searchrestaurant_name);
         address = findViewById(R.id.searchrestaurant_address);
         ratingbar = findViewById(R.id.searchrestaurant_rating);
         Button searchButton = findViewById(R.id.searchrestaurant_searchbutton);
+        favourites = new ArrayList<>();
+        ImageButton addFavourite= findViewById(R.id.searchrestaurant_addfavourite);
+        addFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                favourites.add(place.getId());
+                Toast.makeText(getApplicationContext(), "Added to favourites", Toast.LENGTH_LONG).show();
+
+                System.out.println("displaying favourites: " + favourites.size());
+                for(int i = 0; i < favourites.size(); i++) {
+                    System.out.println(favourites.get(i));
+                }
+            }
+        });
         searchRandomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,8 +139,6 @@ OnRestaurantRequestCompleted {
         if (x == 1) {
             sendRandomRestaurantRequest();
             // launch async task here
-
-
         } else {
             launchPlaceAutoComplete();
         }
@@ -149,7 +165,7 @@ OnRestaurantRequestCompleted {
     }
 
     public void setPlaceDetails(Place place) {
-        searchTextView.setText(place.getName());
+//        searchTextView.setText(place.getName());
         name.setText(place.getName());
         address.setText(place.getAddress());
         System.out.println("RATING:" + (int)place.getRating());
@@ -185,7 +201,7 @@ OnRestaurantRequestCompleted {
             }
             System.out.println("FOUND A PLACE");
             PlaceBufferResponse rPlace = q.getResult();
-            Place place = rPlace.get(0);
+            place = rPlace.get(0);
             System.out.println(restaurantName + "\n" +
                     place.getAddress() + "\n" +
                     place.getPhoneNumber() + "\n" +

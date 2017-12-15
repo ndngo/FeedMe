@@ -20,19 +20,19 @@
             android:layout_height="50sp"
             android:src="@drawable/feedme"
             android:layout_weight="0.2"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:hint="Search for food"
-            android:id="@+id/searchrestaurant_searchtext"
-            android:layout_weight="0.8"/>
-
         <Button
             android:id="@+id/searchrestaurant_searchbutton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.6"
             android:text="Search"/>
+        <ImageButton
+            android:id="@+id/searchrestaurant_addfavourite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/heart"
+            android:layout_weight="0.2"
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
 
