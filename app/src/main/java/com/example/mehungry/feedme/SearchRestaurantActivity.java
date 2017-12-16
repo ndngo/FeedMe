@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,13 +37,14 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class SearchRestaurantActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener,
-OnRestaurantRequestCompleted {
+        implements GoogleApiClient.OnConnectionFailedListener, OnRestaurantRequestCompleted {
     private GoogleApiClient mGoogleApiClient;
     public static final int PLACE_AUTOCOMPLETE_REQUEST = 1;
     protected static GeoDataClient mGeoDataClient;
@@ -53,6 +57,9 @@ OnRestaurantRequestCompleted {
     private RatingBar ratingbar;
     private static LatLng northEast, southWest;
     private ArrayList<String> favourites;
+    private FirebaseDatabase db;
+    private DatabaseReference mDatabase;
+    private String currentPlaceId;
     // can;'t filter results with place picker
     // use autocomplete instead to search nearby
     public void launchPlacePicker() throws GooglePlayServicesNotAvailableException, GooglePlayServicesRepairableException {
@@ -84,6 +91,8 @@ OnRestaurantRequestCompleted {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_restaurant);
 
@@ -110,7 +119,9 @@ OnRestaurantRequestCompleted {
             public void onClick(View v) {
                 favourites.add(place.getId());
                 Toast.makeText(getApplicationContext(), "Added to favourites", Toast.LENGTH_LONG).show();
-
+                mDatabase.child("places").child(place.getId()).child("id").setValue(place.getId());
+                mDatabase.child("places").child(place.getId()).child("name").setValue(place.getName());
+                mDatabase.child("places").child(place.getId()).child("address").setValue(place.getAddress());
                 System.out.println("displaying favourites: " + favourites.size());
                 for(int i = 0; i < favourites.size(); i++) {
                     System.out.println(favourites.get(i));
@@ -196,6 +207,8 @@ OnRestaurantRequestCompleted {
             String restaurantName = response.get(r).getFullText(null).toString().split(",")[0];
             Task<PlaceBufferResponse> q = mGeoDataClient.getPlaceById(response.get(r).getPlaceId());
 
+            currentPlaceId = response.get(r).getPlaceId();
+
             while (!q.isComplete()) {
                 System.out.println("finding place...");
             }
@@ -213,6 +226,7 @@ OnRestaurantRequestCompleted {
         } else {
             sendRandomRestaurantRequest();
         }
+
     }
 
     public void sendRandomRestaurantRequest() {
@@ -222,6 +236,26 @@ OnRestaurantRequestCompleted {
         int selection = random.nextInt(searchString.length - 1);
         //task.execute((searchString[selection] + " food"));
         task.execute((searchString[selection]));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // resolve which menu item was selected
+        switch (item.getItemId()) {
+            case R.id.favourites:
+                startActivity(new Intent(this, ViewFavouritesActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public static class RestaurantRequest extends AsyncTask<String, Void, AutocompletePredictionBufferResponse> {

@@ -34,7 +34,8 @@
         <activity android:name=".ViewNotificationActivity" />
         <activity android:name=".ViewSecurityActivity" />
         <activity android:name=".ViewAccountSettingsActivity" />
-        <activity android:name=".GetRestaurantsAsyncActivity"></activity>
+        <activity android:name=".GetRestaurantsAsyncActivity" />
+        <activity android:name=".ViewFavouritesActivity"></activity>
     </application>
 
 </manifest>
